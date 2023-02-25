@@ -1,0 +1,25 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: hello-app
+  labels:
+    app: hello-app
+spec:
+  replicas: 2
+  template:
+    metadata:
+      name: hello-app
+      labels:
+        app: hello-app
+    spec:
+      containers:
+        - name: hello-app
+          image: paulbouwer/hello-kubernetes:1.10
+          imagePullPolicy: IfNotPresent
+          ports:
+            - name: port-1
+              containerPort: 8080
+      restartPolicy: Always
+  selector:
+    matchLabels:
+      app: hello-app
